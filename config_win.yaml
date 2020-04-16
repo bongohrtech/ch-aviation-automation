@@ -8,19 +8,214 @@ credentials:
     password: itsasecret
 sqlfile: sql.json
 DSN : "CHaviation"
+month: "month2"
 steps:
-  - task:
-      inputs:
-        type: 'execute'
-        dbfile: '.\database.accdb'
-        sql: '0'
-        script: '.\execute.pl'
-  - task:
-      inputs:
-        type: 'import'
-        table: 'Working_Hours_PurelyHR'
-        file: 'DetailsReport_20200101-20200229.csv'
-        import: 'Import Working_Hours_PurelyHR'
-        sql: 'Import Working_Hours_PurelyHR'
-        dbfile: 'database.accdb'
-        script: '.\import.pl'
+  - step:
+    - details:
+        name: "Import data downloaded from PurelyHR"
+        enabled: "true"
+    - task:
+        inputs:
+          type: 'execute'
+          dbfile: '.\database.accdb'
+          sql: '0'
+          script: '.\execute.pl'          
+    - task:
+        inputs:
+          type: 'import'
+          table: 'Working_Hours_PurelyHR'
+          file: 'DetailsReport_20200101-20200229.csv'
+          import: 'Import Working_Hours_PurelyHR'
+          sql: 'Import Working_Hours_PurelyHR'
+          dbfile: 'database.accdb'
+          script: '.\import.pl'
+  - step:
+    - details:
+        name: "Month 1 department heads reports"
+        enabled: "true"
+        dependancy: "month1"
+    - task:
+        inputs:
+          name: "Task 1"
+          type: 'execute'
+          sql: '1'
+    - task:
+        inputs:
+          name: "Task 2"
+          type: 'execute'
+          sql: '2'
+    - task:
+        inputs:
+          name: "Task 3"
+          type: 'execute'
+          sql: '3'
+    - task:
+        inputs:
+          name: "Task 4"
+          type: 'execute'
+          sql: '4'
+    - task:
+        inputs:
+          name: "Task 5"
+          type: 'execute'
+          sql: '5'
+    - task:
+        inputs:
+          name: "Task 6"
+          type: 'execute'
+          sql: '6'
+    - task:
+        inputs:
+          name: "Task 7"
+          type: 'execute'
+          sql: '7'
+    - task:
+        inputs:
+          name: "Task 8"
+          type: 'execute'
+          sql: '8'
+    - task:
+        inputs:
+          name: "Task 9"
+          type: 'execute'
+          sql: '9'
+    - task:
+        inputs:
+          name: "Task 10"
+          type: 'execute'
+          sql: '10'
+    - task:
+        inputs:
+          name: "Task 10a"
+          type: 'execute'
+          sql: '10a'
+    - task:
+        inputs:
+          name: "Task 10b"
+          type: 'execute'
+          sql: '10b'
+    - task:
+        inputs:
+          name: "Task 10c"
+          type: 'execute'
+          sql: '10c'
+  - step:
+    - details:
+        name: "Month 2 department heads reports" 
+        enabled: "true"   
+        dependancy: "month2"
+    - task:
+        inputs:
+          name: "Task 1"
+          type: 'execute'
+          sql: '1'
+    - task:
+        inputs:
+          name: "Task 2"
+          type: 'execute'
+          sql: '2'
+    - task:
+        inputs:
+          name: "Task 3"
+          type: 'execute'
+          sql: '3'
+    - task:
+        inputs:
+          name: "Task 4"
+          type: 'execute'
+          sql: '4'
+    - task:
+        inputs:
+          name: "Task 5a"
+          type: 'execute'
+          sql: '5a'
+    - task:
+        inputs:
+          name: "Task 6"
+          type: 'execute'
+          sql: '6'
+    - task:
+        inputs:
+          name: "Task 7a"
+          type: 'execute'
+          sql: '7a'
+    - task:
+        inputs:
+          name: "Task 8a"
+          type: 'execute'
+          sql: '8a'
+    - task:
+        inputs:
+          name: "Task 9a"
+          type: 'execute'
+          sql: '9a'
+    - task:
+        inputs:
+          name: "Task 11"
+          type: 'execute'
+          sql: '11'
+    - task:
+        inputs:
+          name: "Task 11a"
+          type: 'execute'
+          sql: '11a'
+    - task:
+        inputs:
+          name: "Task 11b"
+          type: 'execute'
+          sql: '11b'
+    - task:
+        inputs:
+          name: "Task 11c"
+          type: 'execute'
+          sql: '11c'
+  - step:
+    - details:
+        name: "Process Current Balances table"
+        enabled: "true"
+    - enabled: "true"
+    - task:
+        inputs:
+          name: "Task 12"
+          type: 'execute'
+          sql: '12'
+  - step:
+    - details:
+        name: "Month 1 Student Hours reports"
+        enabled: "true"
+        dependancy: "month1"
+    - task:
+        inputs:
+          name: "Task 15"
+          type: 'execute'
+          sql: '15'          
+    - task:
+        inputs:
+          name: "Task 16"
+          type: 'execute'
+          sql: '16'          
+    - task:
+        inputs:
+          name: "Task 17"
+          type: 'execute'
+          sql: '17'          
+  - step:
+    - details:
+        name: "Month 2 Student Hours reports"
+        enabled: "true"
+        dependancy: "month2"
+    - task:
+        inputs:
+          name: "Task 15b"
+          type: 'execute'
+          sql: '15b'          
+    - task:
+        inputs:
+          name: "Task 16b"
+          type: 'execute'
+          sql: '16b'          
+    - task:
+        inputs:
+          name: "Task 17b"
+          type: 'execute'
+          sql: '17b'          
