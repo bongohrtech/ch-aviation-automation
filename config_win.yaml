@@ -1,11 +1,4 @@
 ---
-emailName: David
-emailAddresses:
-    - sillymoos@cpan.org
-    - perltricks.com@gmail.com
-credentials:
-    username: sillymoose
-    password: itsasecret
 sqlfile: sql.json
 DSN : "CHaviation"
 month: "month2"

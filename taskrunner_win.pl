@@ -83,24 +83,3 @@ for ( @{ $config->{steps} } ) {
     print "End Loop\n";
 
 }
-
-#print $steps->[0]->{task},"\n";
-
-# access the scalar emailName
-my $emailName = $config->{emailName};
-
-# access the array emailAddresses directly
-my $firstEmailAddress  = $config->{emailAddresses}->[0];
-my $secondEmailAddress = $config->{emailAddresses}->[1];
-
-# loop through and print emailAddresses
-for ( @{ $config->{emailAddresses} } ) { say }
-
-# access the credentials hash key values directly
-my $username = $config->{credentials}->{username};
-my $password = $config->{credentials}->{password};
-
-# loop through and print credentials
-for ( keys %{ $config->{credentials} } ) {
-    say "$_: $config->{credentials}->{$_}";
-}
