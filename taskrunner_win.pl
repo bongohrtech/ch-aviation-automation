@@ -9,6 +9,11 @@ use TaskHandler;
 
 my $config = LoadFile('config_win.yaml');
 
+my $SQL_JSON = $config->{sqlfile};
+#print $SQL_JSON,"\n";
+my $DSN = $config->{DSN};
+#print $DSN,"\n";
+
 for (@{$config->{steps}})  { task }
 
 my $steps = $config->{steps};
@@ -21,21 +26,28 @@ for (@{$config->{steps}}) {
     if($_->{inputs}->{type} eq 'transform'){
       my $param1 = $_->{inputs}->{type};
       my $script = $_->{inputs}->{script};
-      system("$script $param1");
+      #system("$script $param1");
     }elsif($_->{inputs}->{type} eq 'import'){
       my $param1 = $_->{inputs}->{type};
-      my $param2 = $_->{inputs}->{file};
-      my $param3 = $_->{inputs}->{dbfile};
-      my $param4 = $_->{inputs}->{table};
-      my $param5 = $_->{inputs}->{import};
-      my $script = $_->{inputs}->{script};
-      import_csv($param1, $param2, $param3, $param4, $param5);
+      my $csvfile = $_->{inputs}->{file};
+      my $table = $_->{inputs}->{table};
+      my $sql = $_->{inputs}->{sql};
+      
+      print $sql,"\n","\n";
+
+      my $sql = read_json_sql($SQL_JSON, $sql);
+      print $sql,"\n","\n";
+
+      print $csvfile, $table, $sql,"\n";
+      import_csv($csvfile, $table, $sql);
     }elsif($_->{inputs}->{type} eq 'execute'){
       my $param1 = $_->{inputs}->{type};
       my $param2 = $_->{inputs}->{dbfile};
       my $param3 = $_->{inputs}->{sql};
       my $script = $_->{inputs}->{script};
-      system("$script $param1 $param2 $param3");
+      my $sql = read_json_sql($SQL_JSON, $param3);
+      print $sql,"\n","\n";
+      execute_sql($DSN, $sql)
     }
   }
 }

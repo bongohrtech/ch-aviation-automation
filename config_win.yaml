@@ -6,32 +6,21 @@ emailAddresses:
 credentials:
     username: sillymoose
     password: itsasecret
+sqlfile: sql.json
+DSN : "CHaviation"
 steps:
   - task:
       inputs:
         type: 'execute'
         dbfile: '.\database.accdb'
-        sql: '.\sql\0.sql'
+        sql: '0'
         script: '.\execute.pl'
   - task:
       inputs:
         type: 'import'
         table: 'Working_Hours_PurelyHR'
         file: 'DetailsReport_20200101-20200229.csv'
-        import: '.\sql\insert_detailsreport.sql'
+        import: 'Import Working_Hours_PurelyHR'
+        sql: 'Import Working_Hours_PurelyHR'
         dbfile: 'database.accdb'
         script: '.\import.pl'
-  - task1:
-      inputs:
-        type: 'transform'
-        script: '.\transform.pl'
-  - task1:
-      inputs:
-        type: 'execute'
-        dbfile: 'database.accdb'
-        sql: '.\sql\14.sql'
-        script: '.\execute.pl'
-  - task1:
-      inputs:
-        type: 'transform'
-        script: '.\transform.pl'
