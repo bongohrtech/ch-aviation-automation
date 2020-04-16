@@ -16,7 +16,7 @@ sub read_json_sql {
     my $name     = shift;
 
     my $json_text = do {
-        open( my $json_fh, "<:encoding(UTF-8)", $filename )
+        open( my $json_fh, "<:encoding(iso-8859-7)", $filename )
           or die("Can't open \$filename\": $!\n");
         local $/;
         <$json_fh>;
@@ -31,11 +31,13 @@ sub read_json_sql {
 sub execute_sql {
     my $DSN      = shift;
     my $SQLquery = shift;
-    
-    print Dumper $SQLquery;
 
     my $dbh = DBI->connect( "DBI:ODBC:$DSN", undef, undef )
       or die "$DBI::err+str\n";
+    my $dbh =
+      DBI->connect( "DBI:ODBC:$DSN", undef, undef,
+        { RaiseError => 0, PrintError => 0, mysql_enable_utf8 => 1 } )
+      or die "Connect to database failed.";
 
     my $sth = $dbh->prepare($SQLquery);
     $dbh->{LongReadLen} = 1024 * 1024;
@@ -50,7 +52,7 @@ sub execute_sql {
 }
 
 sub read_csv {
-    my $table  = shift;
+    my $table   = shift;
     my $CSVFile = shift;
 
     if ( -e $CSVFile ) {
@@ -58,7 +60,7 @@ sub read_csv {
     }
 
     # stuff
-    my $dbh   = DBI->connect(qq{DBI:CSV:csv_sep_char=,;});
+    my $dbh = DBI->connect(qq{DBI:CSV:csv_sep_char=,;});
     $dbh->{'csv_tables'}->{$table} = { 'file' => $CSVFile };
 
     my $query = "SELECT * FROM $table";
@@ -68,8 +70,8 @@ sub read_csv {
 }
 
 sub import_csv {
-    my $CSVFile   = shift;
-    my $table     = shift;
+    my $CSVFile  = shift;
+    my $table    = shift;
     my $SQLquery = shift;
 
     my $sth = read_csv( $table, $CSVFile );
