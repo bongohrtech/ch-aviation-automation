@@ -2,7 +2,7 @@
 
 Install https://www.microsoft.com/en-us/download/confirmation.aspx?id=13255
 
-Install Strawberry
+Install Strawberry - http://strawberryperl.com/
 
 Create CHAviation ODCBInst DSN
 
