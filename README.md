@@ -11,9 +11,11 @@ cpan install Parse::CSV
 cpan install DBD::CSV
 
 
-Process 1 
+EDIT 
+Variables in config_win.yaml
+DSN : "CHaviation"
+month: "month1" or "month2"
 
-Execute Script 0
-
-Import DetailsReport_20200101-20200229.csv -> Working_Hours_PurelyHR
+EXECUTE
+perl ./taskrunner_win.pl
 
